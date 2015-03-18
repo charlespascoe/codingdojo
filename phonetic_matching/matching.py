@@ -10,13 +10,13 @@ def categorise(name):
     name = re.sub('[^A-Z]', '', name.upper())
     letters = [name[0]]
 
-    for i in range(1, len(name)):
-        if name[i] not in discarded:
-            letters.append(name[i])
+    for l in name[1:]:
+        if l not in discarded:
+            letters.append(l)
 
     cname = []
 
-    for li, letter in enumerate(letters):
+    for letter in letters:
         for ci, cat in enumerate(categories):
             if letter in cat:
                 cletter = ci
