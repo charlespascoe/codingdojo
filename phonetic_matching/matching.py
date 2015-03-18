@@ -44,7 +44,7 @@ def match(input_names, sample_list):
 
 
 if __name__ == '__main__':
-    with open('names2.txt') as f:
+    with sys.stdin as f:
         sample_list = f.read().split('\n')
 
     for name in match(sys.argv[1:], sample_list):
