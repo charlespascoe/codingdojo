@@ -59,7 +59,7 @@ process.stdin.on('readable', function () {
     data += process.stdin.read();
 })
 .on('end', function () {
-    data = data.split('\r\n');
+    data = data.match(/[^\r\n]+/g);
     console.log(match(process.argv.slice(2), data).join('\n'));
 });
 
