@@ -54,13 +54,19 @@ function match (input_names, sample_list) {
 }
 
 
-var data = '';
-process.stdin.on('readable', function () {
-    data += process.stdin.read();
-})
-.on('end', function () {
-    data = data.match(/[^\r\n]+/g);
-    console.log(match(process.argv.slice(2), data).join('\n'));
-});
+function main () {
+    var data = '';
+    process.stdin.on('readable', function () {
+        data += process.stdin.read();
+    })
+    .on('end', function () {
+        data = data.match(/[^\r\n]+/g);
+        console.log(match(process.argv.slice(2), data).join('\n'));
+    });
+}
 
+
+if (require.main === module) main();
+
+exports.match = match;
 
