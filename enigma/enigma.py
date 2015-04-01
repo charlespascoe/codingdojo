@@ -4,7 +4,7 @@ alph = string.ascii_uppercase
 
 class Rotor:
     def __init__(self, setup_string, rollover, disp=0):
-        self.mapping = [alph.index(letter) for letter in setup_String]
+        self.mapping = [alph.index(letter) for letter in setup_string]
         self.next_rotor = None
         self.prev_roto = None
         self.disp = disp
@@ -16,18 +16,22 @@ class Rotor:
         self.disp = (self.disp + 1) % len(alph)
 
     def encode(self, val):
-        self.next_rotor.encode(self.mapping[val])
+        self.next_rotor.encode((self.mapping[(val + self.disp) % len(alph)] + self.disp) % len(alph))
 
     def reflect(self, val):
+        # TODO: needs to use displacement
         self.prev_rotor.reflect(self.mapping.index(val))
 
 
 class Reflector(Rotor):
+    def __init__(self, setup_string):
+        super().__init__(setup_string, setup_string[0], 0)
+
     def increment(self):
         pass
 
     def encode(self, val):
-        self.prev_rotor(self.mapping[val])
+        self.prev_rotor.reflect(self.mapping[val])
 
 
 class Plugboard:
@@ -40,7 +44,7 @@ class Plugboard:
             mapping[b] = a
 
     def encode(self, val):
-
+        pass
 
 
 class EnigmaMachine:
@@ -54,3 +58,4 @@ class EnigmaMachine:
 
     def reflect(self, val):
         pass
+
