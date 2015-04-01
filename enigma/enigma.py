@@ -9,4 +9,14 @@ class Rotor:
         self.disp = 0
         self.rollover = alph.index(rollover)
         
+    def increment(self):
+        self.disp
+    
+    def encode(self, val):
+        self.next_rotor(self.mapping[val])
         
+    def reflect(self, val):
+        self.prev_rotor(self.mapping.index(val))
+        
+
+
