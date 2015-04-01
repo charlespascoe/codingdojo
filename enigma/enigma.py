@@ -7,11 +7,11 @@ class InvalidLetterException(Exception):
 
 
 class Rotor:
-    def __init__(self, setup_string, rollover, disp=0):
+    def __init__(self, setup_string, rollover, disp=None):
         self.mapping = [alph.index(letter) for letter in setup_string]
         self.next_rotor = None
         self.prev_roto = None
-        self.disp = disp
+        self.disp = alph.index(disp) if disp is not None else 0
         self.rollover = alph.index(rollover) if rollover is not None else None
 
     def increment(self):
@@ -76,6 +76,7 @@ class EnigmaMachine:
 
         val = alph.index(letter)
 
+        self.next_rotor.increment()
         self.next_rotor.encode(self.plugboard.encode(val))
 
 
