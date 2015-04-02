@@ -1,0 +1,39 @@
+{
+    'test_cases': {
+        'rotors': {
+            'I': {
+                'setup_string': '',
+                'rollover': '',
+                'disp': null,
+
+                'tests': {
+                    'inital_mapping': [{ 'input': '', 'output': ''}]
+                    'displaced_mapping': [{ 'disp': '', 'input': '', 'output': ''}]
+                }
+            },
+
+            'II': {
+                'something': ''
+            },
+
+            'III': {
+                'something': ''
+            }
+        },
+
+        'reflector': {
+            'setup_string': '',
+            'tests' : {
+                'mapping': [{'input': '', 'output': ''}]
+            }
+        },
+
+        'plugboard': {
+            'mapping': [['A', 'B'], ['C', 'D']],
+
+            'tests': {
+                'mapping': [{'input': '', 'output': ''}]
+            }
+        }
+    }
+}
