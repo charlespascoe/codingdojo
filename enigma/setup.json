@@ -1,0 +1,13 @@
+{
+    'plugboard': [[0, 1], [2, 3]],
+    'rotors': [
+        {
+            'setup_string': '',
+            'rollover': '',
+            'disp': null
+        }
+    ],
+    'reflector': {
+        'setup_string': ''
+    }
+}
