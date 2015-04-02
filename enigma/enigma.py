@@ -20,13 +20,13 @@ class Rotor:
         self.disp = (self.disp + 1) % len(alph)
 
     def encode(self, val):
-        self.next_rotor.encode(self.rotate(self.mapping[self.rotate(val)]))
+        self.next_rotor.encode(self.rotate(self.mapping[self.rotate(val)], True))
 
     def reflect(self, val):
-        self.prev_rotor.reflect(self.rotate(self.mapping.index(self.rotate(val))))
+        self.prev_rotor.reflect(self.rotate(self.mapping.index(self.rotate(val)), True))
 
-    def rotate(self, val):
-        return (val + self.disp) % len(alph)
+    def rotate(self, val, subtract=False):
+        return (val + ((len(alph) - self.disp) if subtract else self.disp)) % len(alph)
 
 
 class Reflector(Rotor):
