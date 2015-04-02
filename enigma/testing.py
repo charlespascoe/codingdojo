@@ -35,6 +35,7 @@ class RotorTesting(unittest.TestCase):
         self.rotor.disp = 5
         self.rotor.encode(enigma.alph.index('K'))
         # K = 10, 10 + 5 = 15, 15 (rotor)=> 7, 7 + 5 = 12, 12 (alph)=> M
+        # See section 1.1 in the documentation
         self.assertEqual(self.dummy_rotor.encode_result, enigma.alph.index('M'))
         # TODO: add more advanced stuff, such as modulo is used
 
