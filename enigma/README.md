@@ -7,8 +7,8 @@ In enigma.py, the Rotor.encode adds the displacement to the value, and then adds
 
 Example:
 
-- The rotor has advanced 1 place, so that 'B' is at the top (and so 'A' from the plugboard goes into 'B' on the rotor); this is 1 more than 'A', so 1 must be added
-- Let's say that this maps to 'Q'; 'Q' has advanced by 1 position, so 'Q' now lines up with 'R' on the next rotor (assuming the next rotor has no displacement)
-- This transformation is independant of position of the rotors either side of it, as the calculations always give the value relative to 'A'
+- Imagine a rotor sandwiched between two fixed plates; on each plate there are 26 electrical contacts, 0 to 25, starting with 0 at the top (so initially, the letter ‘A’ on the rotor will line up with contact 0 on both plates, ‘B’ with 1, and so on)
+- If the rotor is shifted one place forward, the letter ‘B’ would line up with 0 (‘C’ with 1, ‘A’ with 25, etc.). If a voltage is applied to contact 0, it is applied to ‘B’, which in the code is the same as taking the contact value (0) and adding the rotor displacement (1), and getting the mapped value
+- Let’s say, for the sake of example, that ‘B’ maps to ‘C’. Since the rotor has been rotated, ‘C’ (which initially lined up with contact 2) now lines up with contact 1. This is replicated in the code by the subtraction after the mapping.
 
 
