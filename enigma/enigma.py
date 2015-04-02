@@ -7,7 +7,7 @@ class InvalidLetterException(Exception):
 
 
 class Rotor:
-    def __init__(self, setup_string, rollover, disp=0):
+    def __init__(self, setup_string, rollover=None, disp=0):
         self.mapping = [alph.index(letter) for letter in setup_string]
         self.next_rotor = None
         self.prev_roto = None
@@ -31,7 +31,7 @@ class Rotor:
 
 class Reflector(Rotor):
     def __init__(self, setup_string):
-        super().__init__(setup_string, None)
+        super().__init__(setup_string)
 
     def increment(self):
         pass
