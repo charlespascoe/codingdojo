@@ -6,7 +6,12 @@
                 "rollover": "Q",
 
                 "tests": {
-                    "displaced_mapping": [{ "disp": "A", "input": "A", "output": "E"}]
+                    "mapping": [
+                        {"disp": "A", "input": "A", "output": "E"},
+                        {"disp": "A", "input": "Z", "output": "J"},
+                        {"disp": "B", "input": "A", "output": "J"},
+                        {"disp": "B", "input": "J", "output": "M"}
+                    ]
                 }
             },
 
@@ -20,9 +25,12 @@
         },
 
         "reflector": {
-            "setup_string": "",
+            "setup_string": "QYHOGNECVPUZTFDJAXWMKISRBL",
             "tests" : {
-                "mapping": [{"input": "", "output": ""}]
+                "mapping": [
+                    {"input": "A", "output": "Q"},
+                    {"input": "G", "output": "P"}
+                ]
             }
         },
 
