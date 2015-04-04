@@ -14,10 +14,24 @@ def add_tests(suite, cls, data=None):
         if func.startswith('test'):
             suite.addTest(cls(func, data))
 
+
 class TestCase(unittest.TestCase):
-    def __init__(self, methodName='', data=None):
-        super().__init__(methodName)
+    def __init__(self, methodname='', data=None):
+        super().__init__(methodname)
         self.data = data
+
+    # Make method names PEP8 compliant
+    def setUp(self):
+        self.setup()
+
+    def setup(self):
+        pass
+
+    def tearDown(self):
+        self.teardown()
+
+    def teardown(self):
+        pass
 
 
 class TestingRotor(enigma.Rotor):
@@ -33,8 +47,9 @@ class TestingRotor(enigma.Rotor):
     def increment(self):
         self.incremented = True
 
+
 class RotorTests(TestCase):
-    def setUp(self):
+    def setup(self):
         self.rotor = enigma.Rotor(self.data['setup_string'], self.data['rollover'])
         self.dummy_rotor = TestingRotor()
         self.rotor.next_rotor = self.dummy_rotor
@@ -50,6 +65,16 @@ class RotorTests(TestCase):
                 self.rotor.encode(input_val)
                 self.assertEqual(self.dummy_rotor.encode_result, expected_val)
 
+    def test_reflect(self):
+        for subtest in self.data['tests']['mapping']:
+            with self.subTest(subtest=subtest):
+                self.rotor.disp = enigma.alph.index(subtest['disp'])
+                input_val = enigma.alph.index(subtest['input'])
+                output_val = enigma.alph.index(subtest['output'])
+
+                self.rotor.reflect(output_val)
+                self.assertEqual(self.dummy_rotor.reflect_result, input_val)
+
     def test_increment(self):
         # Rotor should only increment the next rotor if
         # it is leaving the rollover position
@@ -62,9 +87,13 @@ class RotorTests(TestCase):
         # Should have incremented next rotor
         self.assertTrue(self.dummy_rotor.incremented)
 
+    def teardown(self):
+        del self.rotor
+        del self.dummy_rotor
+
 
 class ReflectorTests(TestCase):
-    def setUp(self):
+    def setup(self):
         self.reflector = enigma.Reflector(self.data['setup_string'])
         self.dummy_rotor = TestingRotor()
         self.reflector.prev_rotor = self.dummy_rotor
@@ -79,9 +108,65 @@ class ReflectorTests(TestCase):
 
                 self.assertEqual(self.dummy_rotor.reflect_result, output_val)
 
+    def teardown(self):
+        del self.reflector
+        del self.dummy_rotor
+
+
 class PlugboardTests(TestCase):
     def test_mapping(self):
         pass
+
+
+class EnigmaTests(TestCase):
+    def setup(self):
+        plugboard = enigma.Plugboard(self.data['plugboard'])
+        rotors = [enigma.Rotor(r['setup_string'], r['rollover'], r['disp']) for r in self.data['rotors']]
+        reflector = enigma.Reflector(self.data['reflector'])
+
+        self.enigma = enigma.EnigmaMachine(plugboard, rotors, reflector)
+
+        self.ciphertext = ''
+        self.plaintext = ''
+
+    def append_ciphertext(self, letter):
+        self.ciphertext += letter
+
+    def append_plaintext(self, letter):
+        self.plaintext += letter
+
+    def test_encryption(self):
+        for subtest in self.data['tests']:
+            self.setup()
+            with self.subTest(subTest=subtest):
+                plaintext = subtest['plaintext']
+                expected_ciphertext = subtest['ciphertext']
+
+                self.enigma.output = self.append_ciphertext
+
+                for letter in plaintext:
+                    self.enigma.encode(letter)
+
+                self.assertEqual(self.ciphertext, expected_ciphertext)
+
+    def test_decryption(self):
+        for subtest in self.data['tests']:
+            self.setup()
+            with self.subTest(subtest=subtest):
+                expected_plaintext = subtest['plaintext']
+                ciphertext = subtest['ciphertext']
+
+                self.enigma.output = self.append_plaintext
+
+                for letter in ciphertext:
+                    self.enigma.encode(letter)
+
+                self.assertEqual(self.plaintext, expected_plaintext)
+
+    def teardown(self):
+        del self.enigma
+        del self.ciphertext
+        del self.plaintext
 
 
 if __name__ == '__main__':
@@ -89,9 +174,17 @@ if __name__ == '__main__':
         test_data = json.loads(f.read())['test_cases']
 
     suite = unittest.TestSuite()
-    add_tests(suite, RotorTests, test_data['rotors']['I'])
-    add_tests(suite, ReflectorTests, test_data['reflector'])
+
+    for rotor_test_data in test_data['rotor']:
+        add_tests(suite, RotorTests, rotor_test_data)
+
+    for reflector_test_data in test_data['reflector']:
+        add_tests(suite, ReflectorTests, reflector_test_data)
+
     add_tests(suite, PlugboardTests)
+
+    for enigma_test_data in test_data['enigma']:
+        add_tests(suite, EnigmaTests, enigma_test_data)
+
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)
-
