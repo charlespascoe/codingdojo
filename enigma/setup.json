@@ -1,22 +1,22 @@
 {
-    "plugboard": [],
+    "plugboard": [["L", "A"]],
     "rotors": [
         {
-            "setup_string": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+            "wiring": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
             "rollover": "V",
-            "disp": "M"
+            "disp": "A"
         },
 
         {
-            "setup_string": "AJDKSIRUXBLHWTMCQGZNPYFVOE",
+            "wiring": "AJDKSIRUXBLHWTMCQGZNPYFVOE",
             "rollover": "E",
-            "disp": "C"
+            "disp": "B"
         },
 
         {
-            "setup_string": "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+            "wiring": "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
             "rollover": "Q",
-            "disp": "K"
+            "disp": "C"
         }
     ],
     "reflector": "YRUHQSLDPXNGOKMIEBFZCWVJAT"

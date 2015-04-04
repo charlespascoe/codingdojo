@@ -50,7 +50,7 @@ class TestingRotor(enigma.Rotor):
 
 class RotorTests(TestCase):
     def setup(self):
-        self.rotor = enigma.Rotor(self.data['setup_string'], self.data['rollover'])
+        self.rotor = enigma.Rotor(self.data['wiring'], self.data['rollover'])
         self.dummy_rotor = TestingRotor()
         self.rotor.next_rotor = self.dummy_rotor
         self.rotor.prev_rotor = self.dummy_rotor
@@ -94,7 +94,7 @@ class RotorTests(TestCase):
 
 class ReflectorTests(TestCase):
     def setup(self):
-        self.reflector = enigma.Reflector(self.data['setup_string'])
+        self.reflector = enigma.Reflector(self.data['wiring'])
         self.dummy_rotor = TestingRotor()
         self.reflector.prev_rotor = self.dummy_rotor
 
@@ -121,7 +121,7 @@ class PlugboardTests(TestCase):
 class EnigmaTests(TestCase):
     def setup(self):
         plugboard = enigma.Plugboard(self.data['plugboard'])
-        rotors = [enigma.Rotor(r['setup_string'], r['rollover'], r['disp']) for r in self.data['rotors']]
+        rotors = [enigma.Rotor(r['wiring'], r['rollover'], r['disp']) for r in self.data['rotors']]
         reflector = enigma.Reflector(self.data['reflector'])
 
         self.enigma = enigma.EnigmaMachine(plugboard, rotors, reflector)

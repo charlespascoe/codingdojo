@@ -2,7 +2,7 @@
     "test_cases": {
         "rotor": [
             {
-                "setup_string": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+                "wiring": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
                 "rollover": "V",
 
                 "tests": {
@@ -19,7 +19,7 @@
 
         "reflector": [
             {
-                "setup_string": "QYHOGNECVPUZTFDJAXWMKISRBL",
+                "wiring": "QYHOGNECVPUZTFDJAXWMKISRBL",
                 "tests" : {
                     "mapping": [
                         {"input": "A", "output": "Q"},
@@ -44,19 +44,19 @@
                 "plugboard": [],
                 "rotors": [
                     {
-                        "setup_string": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+                        "wiring": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
                         "rollover": "V",
                         "disp": null
                     },
 
                     {
-                        "setup_string": "AJDKSIRUXBLHWTMCQGZNPYFVOE",
+                        "wiring": "AJDKSIRUXBLHWTMCQGZNPYFVOE",
                         "rollover": "E",
                         "disp": null
                     },
 
                     {
-                        "setup_string": "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+                        "wiring": "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
                         "rollover": "Q",
                         "disp": null
                     }
