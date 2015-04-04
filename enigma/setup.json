@@ -1,13 +1,23 @@
 {
-    'plugboard': [[0, 1], [2, 3]],
-    'rotors': [
+    "plugboard": [],
+    "rotors": [
         {
-            'setup_string': '',
-            'rollover': '',
-            'disp': null
+            "setup_string": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+            "rollover": "V",
+            "disp": "M"
+        },
+
+        {
+            "setup_string": "AJDKSIRUXBLHWTMCQGZNPYFVOE",
+            "rollover": "E",
+            "disp": "C"
+        },
+
+        {
+            "setup_string": "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+            "rollover": "Q",
+            "disp": "K"
         }
     ],
-    'reflector': {
-        'setup_string': ''
-    }
+    "reflector": "YRUHQSLDPXNGOKMIEBFZCWVJAT"
 }
