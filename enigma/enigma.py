@@ -10,8 +10,8 @@ class InvalidLetterException(Exception):
 
 
 class Rotor:
-    def __init__(self, setup_string, rollover=None, disp=None):
-        self.mapping = [alph.index(letter) for letter in setup_string]
+    def __init__(self, wiring, rollover=None, disp=None):
+        self.mapping = [alph.index(letter) for letter in wiring]
         self.next_rotor = None
         self.prev_roto = None
         self.disp = alph.index(disp) if disp is not None else 0
@@ -33,8 +33,8 @@ class Rotor:
 
 
 class Reflector(Rotor):
-    def __init__(self, setup_string):
-        super().__init__(setup_string)
+    def __init__(self, wiring):
+        super().__init__(wiring)
 
     def increment(self):
         pass
@@ -49,8 +49,15 @@ class Plugboard:
 
         for pair in mapping:
             a, b = pair
-            mapping[a] = b
-            mapping[b] = a
+
+            if a not in alph or b not in alph:
+                raise InvalidLetterException()
+
+            a = alph.index(a)
+            b = alph.index(b)
+
+            self.mapping[a] = b
+            self.mapping[b] = a
 
     def encode(self, val):
         return self.mapping[val]
