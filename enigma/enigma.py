@@ -42,7 +42,7 @@ class Reflector(Rotor):
 
 class Plugboard:
     def __init__(self, mapping):
-        self.mapping = [0 for i in range(len(alph))]
+        self.mapping = [i for i in range(len(alph))]
 
         for pair in mapping:
             a, b = pair
@@ -54,7 +54,7 @@ class Plugboard:
 
 
 class EnigmaMachine:
-    def __init__(self, rotors, reflector, plugboard):
+    def __init__(self, plugboard, rotors, reflector):
         self.next_rotor = None
         prev_rotor = self
 
@@ -79,10 +79,8 @@ class EnigmaMachine:
         self.next_rotor.increment()
         self.next_rotor.encode(self.plugboard.encode(val))
 
-
     def reflect(self, val):
         result = self.plugboard.encode(val)
 
         if self.output:
             self.output(alph[result])
-
