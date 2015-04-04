@@ -1,45 +1,71 @@
 {
     "test_cases": {
-        "rotors": {
-            "I": {
-                "setup_string": "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
-                "rollover": "Q",
+        "rotor": [
+            {
+                "setup_string": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+                "rollover": "V",
 
                 "tests": {
                     "mapping": [
-                        {"disp": "A", "input": "A", "output": "E"},
-                        {"disp": "A", "input": "Z", "output": "J"},
-                        {"disp": "B", "input": "A", "output": "J"},
-                        {"disp": "B", "input": "J", "output": "M"}
+                        {"disp": "B", "input": "H", "output": "Q"},
+                        {"disp": "C", "input": "E", "output": "A"},
+                        {"disp": "D", "input": "L", "output": "V"},
+                        {"disp": "E", "input": "L", "output": "A"},
+                        {"disp": "F", "input": "O", "output": "V"}
                     ]
                 }
-            },
-
-            "II": {
-                "something": ""
-            },
-
-            "III": {
-                "something": ""
             }
-        },
+        ],
 
-        "reflector": {
-            "setup_string": "QYHOGNECVPUZTFDJAXWMKISRBL",
-            "tests" : {
-                "mapping": [
-                    {"input": "A", "output": "Q"},
-                    {"input": "G", "output": "P"}
+        "reflector": [
+            {
+                "setup_string": "QYHOGNECVPUZTFDJAXWMKISRBL",
+                "tests" : {
+                    "mapping": [
+                        {"input": "A", "output": "Q"},
+                        {"input": "G", "output": "E"}
+                    ]
+                }
+            }
+        ],
+
+        "plugboard": [
+            {
+                "mapping": [["A", "B"], ["C", "D"]],
+
+                "tests": {
+                    "mapping": [{"input": "", "output": ""}]
+                }
+            }
+        ],
+
+        "enigma": [
+            {
+                "plugboard": [],
+                "rotors": [
+                    {
+                        "setup_string": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+                        "rollover": "V",
+                        "disp": null
+                    },
+
+                    {
+                        "setup_string": "AJDKSIRUXBLHWTMCQGZNPYFVOE",
+                        "rollover": "E",
+                        "disp": null
+                    },
+
+                    {
+                        "setup_string": "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+                        "rollover": "Q",
+                        "disp": null
+                    }
+                ],
+                "reflector": "YRUHQSLDPXNGOKMIEBFZCWVJAT",
+                "tests": [
+                    {"plaintext": "HELLOWORLD", "ciphertext": "ILBDAAMTAZ"}
                 ]
             }
-        },
-
-        "plugboard": {
-            "mapping": [["A", "B"], ["C", "D"]],
-
-            "tests": {
-                "mapping": [{"input": "", "output": ""}]
-            }
-        }
+        ]
     }
 }
