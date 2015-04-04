@@ -1,0 +1,12 @@
+Source: http://startpad.googlecode.com/hg/labs/js/enigma/enigma-sim.html
+
+H->H->Q->Q->X->J->Z->S->I->I Enigma Rotors: I-II-III Position: AAB
+E->E->A->A->E->Q->H->L->L->L Enigma Rotors: I-II-III Position: AAC
+L->L->V->Y->C->U->R->G->B->B Enigma Rotors: I-II-III Position: AAD
+L->L->A->A->E->Q->H->L->D->D Enigma Rotors: I-II-III Position: AAE
+O->O->V->Y->C->U->R->G->A->A Enigma Rotors: I-II-III Position: AAF
+W->W->Z->E->L->G->F->W->A->A Enigma Rotors: I-II-III Position: AAG
+O->O->F->I->V->W->N->T->M->M Enigma Rotors: I-II-III Position: AAH
+R->R->G->R->U->C->Y->V->T->T Enigma Rotors: I-II-III Position: AAI
+L->L->B->J->Z->T->L->K->A->A Enigma Rotors: I-II-III Position: AAJ
+D->D->D->K->N->K->B->J->Z->Z Enigma Rotors: I-II-III Position: AAK
