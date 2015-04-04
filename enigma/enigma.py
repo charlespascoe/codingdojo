@@ -1,4 +1,7 @@
 import string
+import sys
+import json
+
 alph = string.ascii_uppercase
 
 
@@ -84,3 +87,58 @@ class EnigmaMachine:
 
         if self.output:
             self.output(alph[result])
+
+
+if __name__ == '__main__':
+    args = sys.argv[1:]
+
+    plugboard = None
+    rotors = []
+    reflector = None
+
+    if len(args) == 0:
+        sys.stderr.write('No setup file provided, defaulting to I-II-III, MCK, Reflector B\n')
+
+        plugboard = Plugboard([])
+
+        # Rotor III
+        rotors.append(Rotor('BDFHJLCPRTXVZNYEIWGAKMUSQO', 'V', 'M'))
+
+        # Rotor II
+        rotors.append(Rotor('AJDKSIRUXBLHWTMCQGZNPYFVOE', 'E', 'C'))
+
+        # Rotor I
+        rotors.append(Rotor('EKMFLGDQVZNTOWYHXUSPAIBRCJ', 'Q', 'K'))
+
+        reflector = Reflector('YRUHQSLDPXNGOKMIEBFZCWVJAT')
+    else:
+        with open(args[0]) as f:
+            data = json.loads(f.read())
+
+        plugboard = Plugboard(data['plugboard'])
+
+        for rotor in data['rotors']:
+            rotors.append(Rotor(**rotor))
+
+        reflector = Reflector(data['reflector'])
+
+    engima = EnigmaMachine(plugboard, rotors, reflector)
+
+    output_str = ''
+
+    def output(letter):
+        global output_str
+        output_str += letter
+
+    engima.output = output
+
+    for letter in sys.stdin.read():
+        letter = letter.upper()
+        if letter in alph:
+            engima.encode(letter)
+
+    sys.stdout.write(output_str)
+    sys.stdout.close()
+
+    # Adds newline, looks better when stdout is terminal
+    sys.stderr.write('\n')
