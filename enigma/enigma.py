@@ -121,13 +121,13 @@ if __name__ == '__main__':
         plugboard = Plugboard([])
 
         # Rotor III
-        rotors.append(Rotor('BDFHJLCPRTXVZNYEIWGAKMUSQO', 'V', 'M'))
+        rotors.append(Rotor('BDFHJLCPRTXVZNYEIWGAKMUSQO', 'V', 'K'))
 
         # Rotor II
         rotors.append(Rotor('AJDKSIRUXBLHWTMCQGZNPYFVOE', 'E', 'C'))
 
         # Rotor I
-        rotors.append(Rotor('EKMFLGDQVZNTOWYHXUSPAIBRCJ', 'Q', 'K'))
+        rotors.append(Rotor('EKMFLGDQVZNTOWYHXUSPAIBRCJ', 'Q', 'M'))
 
         reflector = Reflector('YRUHQSLDPXNGOKMIEBFZCWVJAT')
     else:
