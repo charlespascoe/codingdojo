@@ -44,26 +44,30 @@
                 "plugboard": [],
                 "rotors": [
                     {
+                        "name": "III",
                         "wiring": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
                         "rollover": "V",
-                        "disp": null
+                        "disp": "K"
                     },
 
                     {
+                        "name": "II",
                         "wiring": "AJDKSIRUXBLHWTMCQGZNPYFVOE",
                         "rollover": "E",
-                        "disp": null
+                        "disp": "D"
                     },
 
                     {
+                        "name": "I",
                         "wiring": "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
                         "rollover": "Q",
-                        "disp": null
+                        "disp": "M"
                     }
                 ],
                 "reflector": "YRUHQSLDPXNGOKMIEBFZCWVJAT",
                 "tests": [
-                    {"plaintext": "HELLOWORLD", "ciphertext": "ILBDAAMTAZ"}
+                    {"name": "cipher test", "plaintext": "HELLOWORLD", "ciphertext": "OSDFDRUOSM"},
+                    {"name": "doublestep test", "plaintext": "HELLOWORLDHELLOWORLD", "ciphertext": "OSDFDRUOSMWDUGUMAUWI"}
                 ]
             }
         ]
