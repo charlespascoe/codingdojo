@@ -30,7 +30,8 @@ class TestCase(unittest.TestCase):
 
 class TestingRotor(enigma.Rotor):
     def __init__(self):
-        self.incremented = False
+        self.is_notch_aligned = False
+        self.is_reflector = False
 
     def encode(self, val):
         self.encode_result = val
@@ -39,7 +40,10 @@ class TestingRotor(enigma.Rotor):
         self.reflect_result = val
 
     def increment(self):
-        self.incremented = True
+        return not self.is_reflector
+
+    def notch_aligned(self):
+        return self.is_notch_aligned
 
 
 class RotorTests(TestCase):
@@ -70,16 +74,48 @@ class RotorTests(TestCase):
                 self.assertEqual(self.dummy_rotor.reflect_result, input_val)
 
     def test_increment(self):
-        # Rotor should only increment the next rotor if
-        # it is leaving the rollover position
+        # Rotor should only increment if the previous rotor
+        # it in the rollover position
 
-        self.rotor.disp = self.rotor.rollover - 1
+        self.dummy_rotor.is_notch_aligned = False
+        self.rotor.disp = 10
+
         self.rotor.increment()
-        # Now on the rollover position, no increment
-        self.assertFalse(self.dummy_rotor.incremented)
+
+        self.assertEqual(self.rotor.disp, 10)
+
+        self.dummy_rotor.is_notch_aligned = True
         self.rotor.increment()
-        # Should have incremented next rotor
-        self.assertTrue(self.dummy_rotor.incremented)
+
+        self.assertEqual(self.rotor.disp, 11)
+
+    def test_doublestep(self):
+        self.dummy_rotor.is_notch_aligned = False
+        self.dummy_rotor.is_reflector = True
+        self.rotor.disp = self.rotor.rollover
+
+        self.rotor.increment()
+
+        # No change if the next rotor is a reflector
+        self.assertEqual(self.rotor.disp, self.rotor.rollover)
+
+        self.dummy_rotor.is_reflector = False
+
+        self.rotor.disp = 0
+
+        self.rotor.increment()
+
+        # No change if the next rotor is not a reflector
+        # and the rotor is not in the rollover position
+        # (assuming non-zero rollover position)
+        self.assertEqual(self.rotor.disp, 0)
+
+        self.rotor.disp = self.rotor.rollover
+
+        self.rotor.increment()
+
+        # Increment if next rotor is not relfector and in rollover position
+        self.assertEqual(self.rotor.disp, (self.rotor.rollover + 1) % len(enigma.alph))
 
     def teardown(self):
         del self.rotor
