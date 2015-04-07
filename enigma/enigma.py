@@ -13,13 +13,14 @@ class Rotor:
     def __init__(self, wiring, rollover=None, disp=None):
         self.mapping = [alph.index(letter) for letter in wiring]
         self.next_rotor = None
-        self.prev_roto = None
+        self.prev_rotor = None
         self.disp = alph.index(disp) if disp is not None else 0
         self.rollover = alph.index(rollover) if rollover is not None else None
 
     def increment(self):
-        if self.disp == self.rollover:
+        if self.notch_aligned():
             self.next_rotor.increment()
+
         self.disp = (self.disp + 1) % len(alph)
 
     def encode(self, val):
@@ -27,6 +28,9 @@ class Rotor:
 
     def reflect(self, val):
         self.prev_rotor.reflect(self.rotate(self.mapping.index(self.rotate(val)), True))
+
+    def notch_aligned(self):
+        return self.disp == self.rollover
 
     def rotate(self, val, subtract=False):
         return (val + ((len(alph) - self.disp) if subtract else self.disp)) % len(alph)
@@ -41,6 +45,20 @@ class Reflector(Rotor):
 
     def encode(self, val):
         self.prev_rotor.reflect(self.mapping[val])
+
+
+class EntryRotor(Rotor):
+    def __init__(self):
+        self.next_rotor = None
+
+    def increment(self):
+        self.next_rotor.increment()
+
+    def encode(self, val):
+        self.next_rotor.encode(val)
+
+    def reflect(self, val):
+        self.result = val
 
 
 class Plugboard:
@@ -65,8 +83,10 @@ class Plugboard:
 
 class EnigmaMachine:
     def __init__(self, plugboard, rotors, reflector):
-        self.next_rotor = None
-        prev_rotor = self
+        self.plugboard = plugboard
+
+        self.entry_rotor = EntryRotor()
+        prev_rotor = self.entry_rotor
 
         for rotor in rotors:
             prev_rotor.next_rotor = rotor
@@ -76,24 +96,16 @@ class EnigmaMachine:
         prev_rotor.next_rotor = reflector
         reflector.prev_rotor = prev_rotor
 
-        self.plugboard = plugboard
-
-        self.output = None
-
     def encode(self, letter):
         if letter not in alph:
             raise InvalidLetterException()
 
         val = alph.index(letter)
 
-        self.next_rotor.increment()
-        self.next_rotor.encode(self.plugboard.encode(val))
+        self.entry_rotor.increment()
+        self.entry_rotor.encode(self.plugboard.encode(val))
 
-    def reflect(self, val):
-        result = self.plugboard.encode(val)
-
-        if self.output:
-            self.output(alph[result])
+        return alph[self.plugboard.encode(self.entry_rotor.result)]
 
 
 if __name__ == '__main__':
@@ -133,16 +145,10 @@ if __name__ == '__main__':
 
     output_str = ''
 
-    def output(letter):
-        global output_str
-        output_str += letter
-
-    engima.output = output
-
     for letter in sys.stdin.read():
         letter = letter.upper()
         if letter in alph:
-            engima.encode(letter)
+            output_str += engima.encode(letter)
 
     sys.stdout.write(output_str)
     sys.stdout.close()

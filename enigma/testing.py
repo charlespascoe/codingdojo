@@ -3,12 +3,6 @@ import enigma
 import json
 
 
-rotor_1 = enigma.Rotor('EKMFLGDQVZNTOWYHXUSPAIBRCJ', 'Q')
-rotor_2 = enigma.Rotor('AJDKSIRUXBLHWTMCQGZNPYFVOE', 'E')
-rotor_3 = enigma.Rotor('BDFHJLCPRTXVZNYEIWGAKMUSQO', 'V')
-reflector = enigma.Reflector('QYHOGNECVPUZTFDJAXWMKISRBL')
-
-
 def add_tests(suite, cls, data=None):
     for func in dir(cls):
         if func.startswith('test'):
@@ -126,15 +120,6 @@ class EnigmaTests(TestCase):
 
         self.enigma = enigma.EnigmaMachine(plugboard, rotors, reflector)
 
-        self.ciphertext = ''
-        self.plaintext = ''
-
-    def append_ciphertext(self, letter):
-        self.ciphertext += letter
-
-    def append_plaintext(self, letter):
-        self.plaintext += letter
-
     def test_encryption(self):
         for subtest in self.data['tests']:
             self.setup()
@@ -142,12 +127,12 @@ class EnigmaTests(TestCase):
                 plaintext = subtest['plaintext']
                 expected_ciphertext = subtest['ciphertext']
 
-                self.enigma.output = self.append_ciphertext
+                ciphertext = ''
 
                 for letter in plaintext:
-                    self.enigma.encode(letter)
+                    ciphertext += self.enigma.encode(letter)
 
-                self.assertEqual(self.ciphertext, expected_ciphertext)
+                self.assertEqual(ciphertext, expected_ciphertext)
 
     def test_decryption(self):
         for subtest in self.data['tests']:
@@ -156,17 +141,15 @@ class EnigmaTests(TestCase):
                 expected_plaintext = subtest['plaintext']
                 ciphertext = subtest['ciphertext']
 
-                self.enigma.output = self.append_plaintext
+                plaintext = ''
 
                 for letter in ciphertext:
-                    self.enigma.encode(letter)
+                    plaintext += self.enigma.encode(letter)
 
-                self.assertEqual(self.plaintext, expected_plaintext)
+                self.assertEqual(plaintext, expected_plaintext)
 
     def teardown(self):
         del self.enigma
-        del self.ciphertext
-        del self.plaintext
 
 
 if __name__ == '__main__':
