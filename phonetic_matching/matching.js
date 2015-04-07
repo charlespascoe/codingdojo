@@ -45,7 +45,7 @@ function match (input_names, sample_list) {
     names = [];
     for (i in sample_list) {
         csample_name = categorise(sample_list[i]);
-        if (cinput_names.join().indexOf(csample_name) > -1) {
+        if (cinput_names.join() == csample_name.join()) {
             names.push(sample_list[i]);
         }
     }
