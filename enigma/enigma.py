@@ -18,10 +18,13 @@ class Rotor:
         self.rollover = alph.index(rollover) if rollover is not None else None
 
     def increment(self):
-        if self.notch_aligned():
-            self.next_rotor.increment()
+        # if the next rotor is a rotor (and not a reflector)
+        # and this rotor's notch (rollover) is aligned with a pawl,
+        # then rotate (i.e. the second step in a doublestep), or rotate if previous notch is aligned
+        if (self.next_rotor.increment() and self.notch_aligned()) or self.prev_rotor.notch_aligned():
+            self.disp = self.rotate(1)
 
-        self.disp = (self.disp + 1) % len(alph)
+        return True
 
     def encode(self, val):
         self.next_rotor.encode(self.rotate(self.mapping[self.rotate(val)], True))
@@ -41,7 +44,7 @@ class Reflector(Rotor):
         super().__init__(wiring)
 
     def increment(self):
-        pass
+        return False
 
     def encode(self, val):
         self.prev_rotor.reflect(self.mapping[val])
@@ -59,6 +62,9 @@ class EntryRotor(Rotor):
 
     def reflect(self, val):
         self.result = val
+
+    def notch_aligned(self):
+        return True
 
 
 class Plugboard:
