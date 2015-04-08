@@ -48,15 +48,19 @@ class TestingRotor(enigma.Rotor):
 
 class RotorTests(TestCase):
     def setup(self):
-        self.rotor = enigma.Rotor(self.data['wiring'], self.data['rollover'])
+        self.init_rotor({'rotor': 'I', 'disp': 'A'})
+
+    def init_rotor(self, subtest):
+        self.rotor = Helper.get_rotor(subtest['rotor'], subtest['disp'])
         self.dummy_rotor = TestingRotor()
         self.rotor.next_rotor = self.dummy_rotor
         self.rotor.prev_rotor = self.dummy_rotor
 
     def test_mapping(self):
-        for subtest in self.data['tests']['mapping']:
+        for subtest in self.data['mapping']:
             with self.subTest(subtest=subtest):
-                self.rotor.disp = enigma.alph.index(subtest['disp'])
+                self.init_rotor(subtest)
+
                 input_val = enigma.alph.index(subtest['input'])
                 expected_val = enigma.alph.index(subtest['output'])
 
@@ -64,9 +68,10 @@ class RotorTests(TestCase):
                 self.assertEqual(self.dummy_rotor.encode_result, expected_val)
 
     def test_reflect(self):
-        for subtest in self.data['tests']['mapping']:
+        for subtest in self.data['mapping']:
             with self.subTest(subtest=subtest):
-                self.rotor.disp = enigma.alph.index(subtest['disp'])
+                self.init_rotor(subtest)
+
                 input_val = enigma.alph.index(subtest['input'])
                 output_val = enigma.alph.index(subtest['output'])
 
@@ -124,13 +129,18 @@ class RotorTests(TestCase):
 
 class ReflectorTests(TestCase):
     def setup(self):
-        self.reflector = enigma.Reflector(self.data['wiring'])
+        self.init_reflector('B')
+
+    def init_reflector(self, reflector):
+        self.reflector = Helper.get_reflector(reflector)
         self.dummy_rotor = TestingRotor()
         self.reflector.prev_rotor = self.dummy_rotor
 
     def test_mapping(self):
-        for subtest in self.data['tests']['mapping']:
+        for subtest in self.data['mapping']:
             with self.subTest(subtest=subtest):
+                self.init_reflector(subtest['reflector'])
+
                 input_val = enigma.alph.index(subtest['input'])
                 output_val = enigma.alph.index(subtest['output'])
 
@@ -151,8 +161,8 @@ class PlugboardTests(TestCase):
 class EnigmaTests(TestCase):
     def setup(self):
         plugboard = enigma.Plugboard(self.data['plugboard'])
-        rotors = [enigma.Rotor(r['wiring'], r['rollover'], r['disp']) for r in self.data['rotors']]
-        reflector = enigma.Reflector(self.data['reflector'])
+        rotors = [Helper.get_rotor(r['name'], r['disp']) for r in self.data['rotors']]
+        reflector = Helper.get_reflector(self.data['reflector'])
 
         self.enigma = enigma.EnigmaMachine(plugboard, rotors, reflector)
 
@@ -188,22 +198,36 @@ class EnigmaTests(TestCase):
         del self.enigma
 
 
+class Helper:
+    @classmethod
+    def set_data(cls, data):
+        cls.data = data
+
+    @classmethod
+    def get_rotor(cls, rotor_name, disp=None):
+        rotor = cls.data['rotors'][rotor_name]
+        return enigma.Rotor(disp=disp, **rotor)
+
+    @classmethod
+    def get_reflector(cls, reflector_name):
+        return enigma.Reflector(cls.data['reflectors'][reflector_name])
+
+
 if __name__ == '__main__':
+    with open('rotors.json') as f:
+        Helper.set_data(json.loads(f.read()))
+
     with open('testing.json') as f:
         test_data = json.loads(f.read())['test_cases']
 
     suite = unittest.TestSuite()
 
-    for rotor_test_data in test_data['rotor']:
-        add_tests(suite, RotorTests, rotor_test_data)
+    add_tests(suite, RotorTests, test_data['rotor'])
+    add_tests(suite, ReflectorTests, test_data['reflector'])
+    add_tests(suite, PlugboardTests, test_data['plugboard'])
 
-    for reflector_test_data in test_data['reflector']:
-        add_tests(suite, ReflectorTests, reflector_test_data)
-
-    add_tests(suite, PlugboardTests)
-
-    for enigma_test_data in test_data['enigma']:
-        add_tests(suite, EnigmaTests, enigma_test_data)
+    for enigma_conf in test_data['enigma']:
+        add_tests(suite, EnigmaTests, enigma_conf)
 
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)
