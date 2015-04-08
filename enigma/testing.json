@@ -88,6 +88,45 @@
                 "tests": [
                     { "plaintext": "HELLOWORLD", "ciphertext": "MFNQZBBFZM" }
                 ]
+            },
+
+            {
+                "plugboard": [],
+                "rotors": [
+                    { "name": "I", "disp": "A", "ring_pos": 4 },
+                    { "name": "II", "disp": "A", "ring_pos": 12 },
+                    { "name": "III", "disp": "A", "ring_pos": 19 }
+                ],
+                "reflector": "B",
+                "tests": [
+                    { "plaintext": "HELLOWORLD", "ciphertext": "JCEESPSDYR" }
+                ]
+            },
+
+            {
+                "plugboard": [],
+                "rotors": [
+                    { "name": "I", "disp": "Q" },
+                    { "name": "II", "disp": "E" },
+                    { "name": "III", "disp": "A" }
+                ],
+                "reflector": "B",
+                "tests": [
+                    { "plaintext": "HELLOWORLD", "ciphertext": "NIJMQPUDGW" }
+                ]
+            },
+
+            {
+                "plugboard": [],
+                "rotors": [
+                    { "name": "I", "disp": "P" },
+                    { "name": "II", "disp": "D" },
+                    { "name": "III", "disp": "A" }
+                ],
+                "reflector": "B",
+                "tests": [
+                    { "plaintext": "HELLOWORLD", "ciphertext": "XUWJPJIBIE" }
+                ]
             }
         ]
     }
