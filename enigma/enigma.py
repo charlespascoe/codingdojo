@@ -95,6 +95,8 @@ class Plugboard:
 
 class EnigmaMachine:
     def __init__(self, plugboard, rotors, reflector):
+        rotors.reverse()
+
         self.plugboard = plugboard
 
         self.entry_rotor = EntryRotor()

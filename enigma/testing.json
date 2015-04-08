@@ -27,9 +27,9 @@
             {
                 "plugboard": [],
                 "rotors": [
-                    { "name": "III", "disp": "K" },
+                    { "name": "I", "disp": "M" },
                     { "name": "II", "disp": "D" },
-                    { "name": "I", "disp": "M" }
+                    { "name": "III", "disp": "K" }
                 ],
                 "reflector": "B",
                 "tests": [
@@ -41,9 +41,9 @@
             {
                 "plugboard": [],
                 "rotors": [
-                    { "name": "I", "disp": "A" },
+                    { "name": "III", "disp": "A" },
                     { "name": "II", "disp": "A" },
-                    { "name": "III", "disp": "A" }
+                    { "name": "I", "disp": "A" }
                 ],
                 "reflector": "B",
                 "tests": [
@@ -54,9 +54,9 @@
             {
                 "plugboard": [],
                 "rotors": [
-                    { "name": "II", "disp": "A" },
+                    { "name": "I", "disp": "A" },
                     { "name": "III", "disp": "A" },
-                    { "name": "I", "disp": "A" }
+                    { "name": "II", "disp": "A" }
                 ],
                 "reflector": "B",
                 "tests": [
@@ -93,9 +93,9 @@
             {
                 "plugboard": [],
                 "rotors": [
-                    { "name": "I", "disp": "A", "ring_pos": 5 },
+                    { "name": "III", "disp": "A", "ring_pos": 20 },
                     { "name": "II", "disp": "A", "ring_pos": 13 },
-                    { "name": "III", "disp": "A", "ring_pos": 20 }
+                    { "name": "I", "disp": "A", "ring_pos": 5 }
                 ],
                 "reflector": "B",
                 "tests": [
