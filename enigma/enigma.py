@@ -10,16 +10,18 @@ class InvalidLetterException(Exception):
 
 
 class Rotor:
-    def __init__(self, wiring, rollover=None, disp=None, ring_pos=0):
+    def __init__(self, wiring, rollover=None, disp=None, ring_pos=1):
         self.mapping = [alph.index(letter) for letter in wiring]
         self.next_rotor = None
         self.prev_rotor = None
         self.disp = alph.index(disp) if disp is not None else 0
         self.rollover = alph.index(rollover) if rollover is not None else None
 
-        self.disp += ring_pos
+        ring_pos -= 1
+
+        self.disp += (len(alph) - ring_pos) % len(alph)
         if self.rollover:
-            self.rollover += ring_pos
+            self.rollover += (len(alph) - ring_pos) % len(alph)
 
     def increment(self):
         # if the next rotor is a rotor (and not a reflector)

@@ -93,9 +93,9 @@
             {
                 "plugboard": [],
                 "rotors": [
-                    { "name": "I", "disp": "A", "ring_pos": 4 },
-                    { "name": "II", "disp": "A", "ring_pos": 12 },
-                    { "name": "III", "disp": "A", "ring_pos": 19 }
+                    { "name": "I", "disp": "A", "ring_pos": 5 },
+                    { "name": "II", "disp": "A", "ring_pos": 13 },
+                    { "name": "III", "disp": "A", "ring_pos": 20 }
                 ],
                 "reflector": "B",
                 "tests": [
