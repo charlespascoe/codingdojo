@@ -1,0 +1,34 @@
+{
+    "rotors": {
+        "I": {
+            "wiring": "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+            "rollover": "Q"
+        },
+
+        "II": {
+            "wiring": "AJDKSIRUXBLHWTMCQGZNPYFVOE",
+            "rollover": "E"
+        },
+
+        "III": {
+            "wiring": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+            "rollover": "V"
+        },
+
+        "IV": {
+            "wiring": "ESOVPZJAYQUIRHXLNFTGKDCMWB",
+            "rollover": "J"
+        },
+
+        "V": {
+            "wiring": "VZBRGITYUPSDNHLXAWMJQOFECK",
+            "rollover": "Z"
+        }
+    },
+
+    "reflectors": {
+        "A": "EJMZALYXVBWFCRQUONTSPIKHGD",
+        "B": "YRUHQSLDPXNGOKMIEBFZCWVJAT",
+        "C": "FVPJIAOYEDRZXWGCTKUQSBNMHL"
+    }
+}
