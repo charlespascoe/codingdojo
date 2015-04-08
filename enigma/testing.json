@@ -1,73 +1,92 @@
 {
     "test_cases": {
-        "rotor": [
-            {
-                "wiring": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
-                "rollover": "V",
+        "rotor": {
+            "mapping": [
+                { "rotor": "III", "disp": "B", "input": "H", "output": "Q" },
+                { "rotor": "III", "disp": "C", "input": "E", "output": "A" },
+                { "rotor": "III", "disp": "D", "input": "L", "output": "V" },
+                { "rotor": "III", "disp": "E", "input": "L", "output": "A" },
+                { "rotor": "III", "disp": "F", "input": "O", "output": "V" }
+            ]
+        },
 
-                "tests": {
-                    "mapping": [
-                        {"disp": "B", "input": "H", "output": "Q"},
-                        {"disp": "C", "input": "E", "output": "A"},
-                        {"disp": "D", "input": "L", "output": "V"},
-                        {"disp": "E", "input": "L", "output": "A"},
-                        {"disp": "F", "input": "O", "output": "V"}
-                    ]
-                }
-            }
-        ],
+        "reflector": {
+            "mapping": [
+                { "reflector": "B", "input": "A", "output": "Y" },
+                { "reflector": "B", "input": "G", "output": "L" }
+            ]
+        },
 
-        "reflector": [
-            {
-                "wiring": "QYHOGNECVPUZTFDJAXWMKISRBL",
-                "tests" : {
-                    "mapping": [
-                        {"input": "A", "output": "Q"},
-                        {"input": "G", "output": "E"}
-                    ]
-                }
-            }
-        ],
-
-        "plugboard": [
-            {
-                "mapping": [["A", "B"], ["C", "D"]],
-
-                "tests": {
-                    "mapping": [{"input": "", "output": ""}]
-                }
-            }
-        ],
+        "plugboard": {
+            "mapping": [
+                { "wiring": ["AB", "CD"], "input": "", "output": "" }
+            ]
+        },
 
         "enigma": [
             {
                 "plugboard": [],
                 "rotors": [
-                    {
-                        "name": "III",
-                        "wiring": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
-                        "rollover": "V",
-                        "disp": "K"
-                    },
-
-                    {
-                        "name": "II",
-                        "wiring": "AJDKSIRUXBLHWTMCQGZNPYFVOE",
-                        "rollover": "E",
-                        "disp": "D"
-                    },
-
-                    {
-                        "name": "I",
-                        "wiring": "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
-                        "rollover": "Q",
-                        "disp": "M"
-                    }
+                    { "name": "III", "disp": "K" },
+                    { "name": "II", "disp": "D" },
+                    { "name": "I", "disp": "M" }
                 ],
-                "reflector": "YRUHQSLDPXNGOKMIEBFZCWVJAT",
+                "reflector": "B",
                 "tests": [
-                    {"name": "cipher test", "plaintext": "HELLOWORLD", "ciphertext": "OSDFDRUOSM"},
-                    {"name": "doublestep test", "plaintext": "HELLOWORLDHELLOWORLD", "ciphertext": "OSDFDRUOSMWDUGUMAUWI"}
+                    { "name": "cipher test", "plaintext": "HELLOWORLD", "ciphertext": "OSDFDRUOSM" },
+                    { "name": "doublestep test", "plaintext": "HELLOWORLDHELLOWORLD", "ciphertext": "OSDFDRUOSMWDUGUMAUWI" }
+                ]
+            },
+
+            {
+                "plugboard": [],
+                "rotors": [
+                    { "name": "I", "disp": "A" },
+                    { "name": "II", "disp": "A" },
+                    { "name": "III", "disp": "A" }
+                ],
+                "reflector": "B",
+                "tests": [
+                    { "plaintext": "HELLOWORLD", "ciphertext": "MFNCZBBFZM" }
+                ]
+            },
+
+            {
+                "plugboard": [],
+                "rotors": [
+                    { "name": "II", "disp": "A" },
+                    { "name": "III", "disp": "A" },
+                    { "name": "I", "disp": "A" }
+                ],
+                "reflector": "B",
+                "tests": [
+                    { "plaintext": "HELLOWORLD", "ciphertext": "ZXVMIZYFEY" }
+                ]
+            },
+
+            {
+                "plugboard": [],
+                "rotors": [
+                    { "name": "I", "disp": "B" },
+                    { "name": "II", "disp": "X" },
+                    { "name": "III", "disp": "J" }
+                ],
+                "reflector": "B",
+                "tests": [
+                    { "plaintext": "HELLOWORLD", "ciphertext": "QNDMFRCGTS" }
+                ]
+            },
+
+            {
+                "plugboard": ["CQ", "XP"],
+                "rotors": [
+                    { "name": "I", "disp": "A" },
+                    { "name": "II", "disp": "A" },
+                    { "name": "III", "disp": "A" }
+                ],
+                "reflector": "B",
+                "tests": [
+                    { "plaintext": "HELLOWORLD", "ciphertext": "MFNQZBBFZM" }
                 ]
             }
         ]
