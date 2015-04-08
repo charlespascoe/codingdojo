@@ -106,9 +106,9 @@
             {
                 "plugboard": [],
                 "rotors": [
-                    { "name": "I", "disp": "A" },
+                    { "name": "I", "disp": "Q" },
                     { "name": "II", "disp": "E" },
-                    { "name": "III", "disp": "Q" }
+                    { "name": "III", "disp": "A" }
                 ],
                 "reflector": "B",
                 "tests": [
@@ -119,9 +119,9 @@
             {
                 "plugboard": [],
                 "rotors": [
-                    { "name": "I", "disp": "A" },
+                    { "name": "I", "disp": "P" },
                     { "name": "II", "disp": "D" },
-                    { "name": "III", "disp": "P" }
+                    { "name": "III", "disp": "A" }
                 ],
                 "reflector": "B",
                 "tests": [
