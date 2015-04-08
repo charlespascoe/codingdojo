@@ -161,7 +161,7 @@ class PlugboardTests(TestCase):
 class EnigmaTests(TestCase):
     def setup(self):
         plugboard = enigma.Plugboard(self.data['plugboard'])
-        rotors = [Helper.get_rotor(r['name'], r['disp']) for r in self.data['rotors']]
+        rotors = [Helper.get_rotor(r['name'], r['disp'], r.get('ring_pos', 0)) for r in self.data['rotors']]
         reflector = Helper.get_reflector(self.data['reflector'])
 
         self.enigma = enigma.EnigmaMachine(plugboard, rotors, reflector)
@@ -204,9 +204,9 @@ class Helper:
         cls.data = data
 
     @classmethod
-    def get_rotor(cls, rotor_name, disp=None):
-        rotor = cls.data['rotors'][rotor_name]
-        return enigma.Rotor(disp=disp, **rotor)
+    def get_rotor(cls, name, disp=None, ring_pos=0):
+        rotor = cls.data['rotors'][name]
+        return enigma.Rotor(rotor['wiring'], rotor['rollover'], disp, ring_pos)
 
     @classmethod
     def get_reflector(cls, reflector_name):
