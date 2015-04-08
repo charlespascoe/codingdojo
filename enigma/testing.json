@@ -67,9 +67,9 @@
             {
                 "plugboard": [],
                 "rotors": [
-                    { "name": "I", "disp": "B" },
+                    { "name": "III", "disp": "J" },
                     { "name": "II", "disp": "X" },
-                    { "name": "III", "disp": "J" }
+                    { "name": "I", "disp": "B" }
                 ],
                 "reflector": "B",
                 "tests": [
@@ -80,9 +80,9 @@
             {
                 "plugboard": ["CQ", "XP"],
                 "rotors": [
-                    { "name": "I", "disp": "A" },
+                    { "name": "III", "disp": "A" },
                     { "name": "II", "disp": "A" },
-                    { "name": "III", "disp": "A" }
+                    { "name": "I", "disp": "A" }
                 ],
                 "reflector": "B",
                 "tests": [
@@ -106,9 +106,9 @@
             {
                 "plugboard": [],
                 "rotors": [
-                    { "name": "I", "disp": "Q" },
+                    { "name": "III", "disp": "A" },
                     { "name": "II", "disp": "E" },
-                    { "name": "III", "disp": "A" }
+                    { "name": "I", "disp": "Q" }
                 ],
                 "reflector": "B",
                 "tests": [
@@ -119,9 +119,9 @@
             {
                 "plugboard": [],
                 "rotors": [
-                    { "name": "I", "disp": "P" },
+                    { "name": "III", "disp": "A" },
                     { "name": "II", "disp": "D" },
-                    { "name": "III", "disp": "A" }
+                    { "name": "I", "disp": "P" }
                 ],
                 "reflector": "B",
                 "tests": [
