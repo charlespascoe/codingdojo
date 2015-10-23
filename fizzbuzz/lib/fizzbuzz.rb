@@ -1,19 +1,19 @@
 class FizzBuzz
-  def fizz n
+  def fizz? n
     n % 3 == 0 and n > 0
   end
 
-  def buzz n
+  def buzz? n
     n % 5 == 0 and n > 0
   end
 
   def fizzbuzz n
     result = ''
 
-    if fizz n
+    if fizz? n
       result += 'fizz'
     end
-    if buzz n
+    if buzz? n
       result += 'buzz'
     end
 

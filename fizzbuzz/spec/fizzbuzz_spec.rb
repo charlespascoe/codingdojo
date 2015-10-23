@@ -1,24 +1,24 @@
 require 'fizzbuzz'
 
 describe FizzBuzz do
-  describe '#fizz' do
+  describe '#fizz?' do
     results = {0 => false, 1 => false, 3 => true, 5 => false, 6 => true, 9 => true, 10 => false}
 
     results.each do |key, val|
       it "should return #{val} for #{key}" do
         f = FizzBuzz.new
-        expect(f.fizz key).to eq(val)
+        expect(f.fizz? key).to eq(val)
       end
     end
   end
 
-  describe '#buzz' do
+  describe '#buzz?' do
     results = {0 => false, 1 => false, 3 => false, 5 => true, 6 => false, 9 => false, 10 => true}
 
     results.each do |key, val|
       it "should return #{val} for #{key}" do
         f = FizzBuzz.new
-        expect(f.buzz key).to eq(val)
+        expect(f.buzz? key).to eq(val)
       end
     end
   end
